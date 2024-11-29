@@ -2,7 +2,7 @@ using Zenject;
 
 namespace Assets.Scripts.Screens.GamePlay
 {
-    public class GamePlayInstaller : MonoInstaller
+    public class GamePlayUIInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {

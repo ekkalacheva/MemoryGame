@@ -15,3 +15,13 @@ MonoBehaviour:
   _scenesConfig:
     MainMenuSceneName: MainMenuScene
     GameplaySceneName: GamePlayScene
+  _gameComplexityConfig:
+    Easy:
+      Rows: 4
+      Columns: 2
+    Medium:
+      Rows: 5
+      Columns: 4
+    Hard:
+      Rows: 6
+      Columns: 4

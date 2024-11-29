@@ -10,9 +10,13 @@ namespace Assets.Scripts.Game
         [SerializeField]
         private ScenesConfig _scenesConfig;
 
+        [SerializeField]
+        private GameComplexityConfig _gameComplexityConfig;
+
         public override void InstallBindings()
         {
             Container.BindInstance(_scenesConfig);
+            Container.BindInstance(_gameComplexityConfig);
         }
     }
 }

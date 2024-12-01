@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.Scripts.GamePlay
+namespace MemoryGame.GamePlay
 {
     [Serializable]
     internal class GameFieldSettings

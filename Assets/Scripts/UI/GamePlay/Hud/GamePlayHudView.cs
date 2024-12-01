@@ -1,12 +1,12 @@
 using System;
-using Assets.Scripts.Base.View;
+using MemoryGame.Base.View;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Assets.Scripts.Screens.GamePlay
+namespace MemoryGame.UI.GamePlay
 {
-    public class GamePlayHudView : MonoBehaviour, IGamePlayHudView
+    public class GamePlayHudView : BaseView, IGamePlayHudView
     {
         public event Action BackButtonClicked;
         public event Action RestartButtonClicked;
@@ -17,24 +17,22 @@ namespace Assets.Scripts.Screens.GamePlay
         [SerializeField]
         private Button _restartButton;
 
-        private IPresenter _presenter;
-
         [Inject]
         private void Construct(GamePlayHudPresenter.Factory presenterFactory)
         {
             _presenter = presenterFactory.Create(this);
         }
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
-            _presenter?.Initialize();
+            base.OnEnable();
             _backButton.onClick.AddListener(RiseBackButtonClickedEvent);
             _restartButton.onClick.AddListener(RiseRestartButtonClickedEvent);
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
-            _presenter?.UnInitialize();
+            base.OnDisable();
             _backButton.onClick.RemoveListener(RiseBackButtonClickedEvent);
             _restartButton.onClick.RemoveListener(RiseRestartButtonClickedEvent);
         }

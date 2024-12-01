@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.Scripts.Game
+namespace MemoryGame.Game
 {
     [Serializable]
     internal class ScenesConfig

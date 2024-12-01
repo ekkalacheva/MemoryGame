@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.GamePlay
+namespace MemoryGame.GamePlay
 {
     [CreateAssetMenu(fileName = "GamePlaySettingsInstaller", menuName = "Installers/GamePlaySettingsInstaller")]
     public class GamePlaySettingsInstaller : ScriptableObjectInstaller<GamePlaySettingsInstaller>

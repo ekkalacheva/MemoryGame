@@ -1,8 +1,8 @@
-﻿using Assets.Scripts.Base.View;
-using Assets.Scripts.Game;
+﻿using MemoryGame.Base.View;
+using MemoryGame.Game;
 using Zenject;
 
-namespace Assets.Scripts.Screens.MainMenu
+namespace MemoryGame.UI.MainMenu
 {
     internal class GameStartScreenPresenter: IPresenter
     {

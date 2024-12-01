@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Game.States
+﻿namespace MemoryGame.Game.States
 {
     internal enum GameState
     {

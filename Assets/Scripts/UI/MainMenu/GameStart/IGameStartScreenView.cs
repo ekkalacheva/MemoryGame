@@ -1,7 +1,7 @@
 ﻿using System;
-using Assets.Scripts.Game;
+using MemoryGame.Game;
 
-namespace Assets.Scripts.Screens.MainMenu
+namespace MemoryGame.UI.MainMenu
 {
     internal interface IGameStartScreenView
     {

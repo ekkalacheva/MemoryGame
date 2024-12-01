@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-namespace Assets.Scripts.GamePlay
+namespace MemoryGame.GamePlay
 {
     public class GameCardPresenter: IGameCardPresenter
     {

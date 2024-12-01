@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Game
+﻿namespace MemoryGame.Game
 {
     internal class GameSignals
     {

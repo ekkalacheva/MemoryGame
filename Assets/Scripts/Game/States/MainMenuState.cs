@@ -1,8 +1,8 @@
-﻿using Assets.Scripts.Base.States;
+﻿using MemoryGame.Base.States;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace Assets.Scripts.Game
+namespace MemoryGame.Game
 {
     internal class MainMenuState: IState
     {
@@ -20,25 +20,14 @@ namespace Assets.Scripts.Game
         {
             if (_sceneLoader.IsSceneLoaded(_scenesConfig.MainMenuSceneName))
             {
-                ShowScene();
                 return;
             }
 
-            _sceneLoader.LoadSceneAsync(_scenesConfig.MainMenuSceneName, LoadSceneMode.Single, ShowScene);
+            _sceneLoader.LoadScene(_scenesConfig.MainMenuSceneName, LoadSceneMode.Single);
         }
 
         public void OnExit()
         {
-            HideScene();
-        }
-
-        private void ShowScene()
-        {
-        }
-
-        private void HideScene()
-        {
-
         }
 
         #region Factory

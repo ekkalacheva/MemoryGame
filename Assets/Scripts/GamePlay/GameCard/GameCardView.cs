@@ -1,12 +1,11 @@
+using MemoryGame.Base.View;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.GamePlay
+namespace MemoryGame.GamePlay
 {
-    public class GameCardView : MonoBehaviour, IGameCardView
+    public class GameCardView : BaseView, IGameCardView
     {
-        private IGameCardPresenter _presenter;
-
         [Inject]
         private void Construct(Transform parent,
                                GameCardPresenter.Factory presenterFactory)
@@ -15,14 +14,14 @@ namespace Assets.Scripts.GamePlay
             _presenter = presenterFactory.Create(this);
         }
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
-            _presenter?.Initialize();
+            base.OnEnable();
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
-            _presenter?.UnInitialize();
+            base.OnDisable();
         }
 
         #region Factory

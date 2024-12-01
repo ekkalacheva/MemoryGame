@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace Assets.Scripts.Screens.GamePlay
+namespace MemoryGame.UI.GamePlay
 {
     public class GamePlayUIInstaller : MonoInstaller
     {

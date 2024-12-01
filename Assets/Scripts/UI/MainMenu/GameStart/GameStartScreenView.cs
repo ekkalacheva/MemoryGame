@@ -1,13 +1,13 @@
 using System;
-using Assets.Scripts.Base.View;
-using Assets.Scripts.Game;
+using MemoryGame.Base.View;
+using MemoryGame.Game;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Assets.Scripts.Screens.MainMenu
+namespace MemoryGame.UI.MainMenu
 {
-    public class GameStartScreenView : MonoBehaviour, IGameStartScreenView
+    public class GameStartScreenView : BaseView, IGameStartScreenView
     {
         public event Action<GameComplexity> GameComplexityButtonClicked;
 
@@ -20,25 +20,23 @@ namespace Assets.Scripts.Screens.MainMenu
         [SerializeField]
         private Button _hardButton;
 
-        private IPresenter _presenter;
-
         [Inject]
         private void Construct(GameStartScreenPresenter.Factory presenterFactory)
         {
             _presenter = presenterFactory.Create(this);
         }
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
-            _presenter?.Initialize();
+            base.OnEnable();
             _easyButton.onClick.AddListener(OnEasyButtonClicked);
             _mediumButton.onClick.AddListener(OnMediumButtonClicked);
             _hardButton.onClick.AddListener(OnHardButtonClicked);
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
-            _presenter?.UnInitialize();
+            base.OnDisable();
             _easyButton.onClick.RemoveListener(OnEasyButtonClicked);
             _mediumButton.onClick.RemoveListener(OnMediumButtonClicked);
             _hardButton.onClick.RemoveListener(OnHardButtonClicked);

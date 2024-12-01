@@ -1,9 +1,9 @@
 ﻿using System;
-using Assets.Scripts.Base.States;
+using MemoryGame.Base.States;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace Assets.Scripts.Game
+namespace MemoryGame.Game
 {
     internal class GamePlayState: IState
     {
@@ -21,18 +21,13 @@ namespace Assets.Scripts.Game
         {
             if (_sceneLoader.IsSceneLoaded(_scenesConfig.GameplaySceneName))
             {
-                ShowScene();
                 return;
             }
 
-            _sceneLoader.LoadSceneAsync(_scenesConfig.GameplaySceneName, LoadSceneMode.Single, ShowScene);
+            _sceneLoader.LoadScene(_scenesConfig.GameplaySceneName, LoadSceneMode.Single);
         }
 
         public void OnExit()
-        {
-        }
-
-        private void ShowScene()
         {
         }
 

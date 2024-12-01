@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace Assets.Scripts.Screens.MainMenu
+namespace MemoryGame.UI.MainMenu
 {
     public class MainMenuInstaller : MonoInstaller
     {

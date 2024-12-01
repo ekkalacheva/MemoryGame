@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts.Game
+namespace MemoryGame.Game
 {
     internal class SceneLoader: ISceneLoader
     {
@@ -12,21 +12,12 @@ namespace Assets.Scripts.Game
             return scene.name == sceneName;
         }
 
+        public void LoadScene(string sceneName, LoadSceneMode loadSceneMode)
+        {
+            SceneManager.LoadScene(sceneName, loadSceneMode);
+        }
+
         public void LoadSceneAsync(string sceneName, LoadSceneMode loadSceneMode, Action onLoaded, bool allowActivation = true)
-        {
-            LoadScene(sceneName, loadSceneMode, onLoaded, allowActivation);
-        }
-
-        public void UnloadSceneAsync(string sceneName, Action onUnloaded = null)
-        {
-            var asyncOperation = SceneManager.UnloadSceneAsync(sceneName);
-            if (onUnloaded != null)
-            {
-                asyncOperation.completed += _ => onUnloaded?.Invoke();
-            }
-        }
-
-        private void LoadScene(string sceneName, LoadSceneMode loadSceneMode, Action onLoaded, bool allowActivation = true)
         {
             AsyncOperation async = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
 
@@ -36,6 +27,15 @@ namespace Assets.Scripts.Game
             }
 
             async.allowSceneActivation = allowActivation;
+        }
+
+        public void UnloadSceneAsync(string sceneName, Action onUnloaded = null)
+        {
+            var asyncOperation = SceneManager.UnloadSceneAsync(sceneName);
+            if (onUnloaded != null)
+            {
+                asyncOperation.completed += _ => onUnloaded?.Invoke();
+            }
         }
     }
 }

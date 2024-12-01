@@ -1,8 +1,8 @@
 using System;
-using Assets.Scripts.Base.States;
+using MemoryGame.Base.States;
 using Zenject;
 
-namespace Assets.Scripts.Game
+namespace MemoryGame.Game
 {
     public class GameInstaller : MonoInstaller
     {

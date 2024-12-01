@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Numerics;
-using Assets.Scripts.Game;
+using MemoryGame.Game;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.GamePlay
+namespace MemoryGame.GamePlay
 {
     internal class GameFieldBuilder: IInitializable, IDisposable
     {

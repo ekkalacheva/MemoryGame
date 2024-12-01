@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Base.States
+﻿namespace MemoryGame.Base.States
 {
     internal class StateController
     {

@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.Base.View;
+﻿using MemoryGame.Base.View;
 
-namespace Assets.Scripts.GamePlay
+namespace MemoryGame.GamePlay
 {
     internal interface IGameCardPresenter: IPresenter
     {

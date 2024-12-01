@@ -1,9 +1,9 @@
 ﻿using System;
-using Assets.Scripts.Base.States;
-using Assets.Scripts.Game.States;
+using MemoryGame.Base.States;
+using MemoryGame.Game.States;
 using Zenject;
 
-namespace Assets.Scripts.Game
+namespace MemoryGame.Game
 {
     internal class GameStatesController: StateController, IInitializable, IDisposable
     {

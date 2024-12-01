@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assets.Scripts.Screens.GamePlay
+namespace MemoryGame.UI.GamePlay
 {
     internal interface IGamePlayHudView
     {

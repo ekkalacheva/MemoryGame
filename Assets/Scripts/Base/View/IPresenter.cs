@@ -1,6 +1,6 @@
-﻿namespace Assets.Scripts.Base.View
+﻿namespace MemoryGame.Base.View
 {
-    internal interface IPresenter
+    public interface IPresenter
     {
         void Initialize();
 

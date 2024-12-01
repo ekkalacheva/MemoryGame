@@ -1,21 +1,27 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.Game
 {
     [Serializable]
     internal class GameComplexityConfig
     {
-        public GameFieldSize Easy;
-        public GameFieldSize Medium;
-        public GameFieldSize Hard;
+        [SerializeField]
+        private GameFieldSize _easy;
+
+        [SerializeField]
+        private GameFieldSize _medium;
+
+        [SerializeField]
+        private GameFieldSize _hard;
 
         public GameFieldSize GetFieldSize(GameComplexity complexity)
         {
             switch (complexity)
             {
-                case GameComplexity.Easy: return Easy;
-                case GameComplexity.Medium: return Medium;
-                case GameComplexity.Hard: return Hard;
+                case GameComplexity.Easy: return _easy;
+                case GameComplexity.Medium: return _medium;
+                case GameComplexity.Hard: return _hard;
 
                 default: throw new NotImplementedException("Unsupported complexity type");
             }
@@ -25,7 +31,13 @@ namespace Assets.Scripts.Game
     [Serializable]
     internal class GameFieldSize
     {
-        public int Rows;
-        public int Columns;
+        [SerializeField]
+        private int _rows;
+
+        [SerializeField]
+        private int _columns;
+
+        public int Rows => _rows;
+        public int Columns => _columns;
     }
 }

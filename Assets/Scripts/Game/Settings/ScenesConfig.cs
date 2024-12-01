@@ -1,12 +1,19 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.Game
 {
     [Serializable]
     internal class ScenesConfig
     {
-        public string MainMenuSceneName;
+        [SerializeField]
+        private string _mainMenuSceneName;
 
-        public string GameplaySceneName;
+        [SerializeField]
+        private string _gameplaySceneName;
+
+        public string MainMenuSceneName => _mainMenuSceneName;
+
+        public string GameplaySceneName => _gameplaySceneName;
     }
 }

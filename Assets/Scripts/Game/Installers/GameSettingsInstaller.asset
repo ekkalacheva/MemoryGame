@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: GameSettingsInstaller
   m_EditorClassIdentifier: 
   _scenesConfig:
-    MainMenuSceneName: MainMenuScene
-    GameplaySceneName: GamePlayScene
+    _mainMenuSceneName: MainMenuScene
+    _gameplaySceneName: GamePlayScene
   _gameComplexityConfig:
-    Easy:
-      Rows: 4
-      Columns: 2
-    Medium:
-      Rows: 5
-      Columns: 4
-    Hard:
-      Rows: 6
-      Columns: 4
+    _easy:
+      _rows: 4
+      _columns: 2
+    _medium:
+      _rows: 5
+      _columns: 4
+    _hard:
+      _rows: 6
+      _columns: 4

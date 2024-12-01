@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Numerics;
 using Assets.Scripts.Game;
+using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.GamePlay
@@ -9,14 +11,17 @@ namespace Assets.Scripts.GamePlay
         private readonly GameComplexityConfig _complexityConfig;
         private readonly GamePlayModel _gamePlayModel;
         private readonly GameCardView.Factory _gameCardViewFactory;
+        private readonly GameFieldSettings _gameFieldSettings;
 
         public GameFieldBuilder(GameComplexityConfig complexityConfig, 
                                 GamePlayModel gamePlayModel, 
-                                GameCardView.Factory gameCardViewFactory)
+                                GameCardView.Factory gameCardViewFactory, 
+                                GameFieldSettings gameFieldSettings)
         {
             _complexityConfig = complexityConfig;
             _gamePlayModel = gamePlayModel;
             _gameCardViewFactory = gameCardViewFactory;
+            _gameFieldSettings = gameFieldSettings;
         }
 
         public void Initialize()
@@ -31,7 +36,15 @@ namespace Assets.Scripts.GamePlay
 
         private void CreateGameField()
         {
+            var cardSize = CalculateGameCardSize();
+        }
 
+        private float CalculateGameCardSize()
+        {
+            var cameraHeight = Camera.main.orthographicSize * 2;
+            var cameraWidth = cameraHeight * Camera.main.aspect;
+
+            return 0;
         }
     }
 }

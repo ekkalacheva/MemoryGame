@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: GamePlaySettingsInstaller
   m_EditorClassIdentifier: 
   _gameCardPrefab: {fileID: 3777973776010571981, guid: 482b75fbcb8559147a53730d7948fd76, type: 3}
+  _gameFieldSettings:
+    _borderOffset: {x: 1, y: 2}

@@ -9,10 +9,15 @@ namespace Assets.Scripts.GamePlay
         [SerializeField] 
         private GameCardView _gameCardPrefab;
 
+        [SerializeField]
+        private GameFieldSettings _gameFieldSettings;
+
         public override void InstallBindings()
         {
             Container.BindFactory<Transform, GameCardView, GameCardView.Factory>()
                 .FromComponentInNewPrefab(_gameCardPrefab);
+
+            Container.BindInstance(_gameFieldSettings).WhenInjectedInto<GameFieldBuilder>();
         }
     }
 }

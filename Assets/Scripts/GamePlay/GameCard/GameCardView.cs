@@ -14,6 +14,16 @@ namespace MemoryGame.GamePlay
             _presenter = presenterFactory.Create(this);
         }
 
+        public void SetPosition(Vector2 position)
+        {
+            transform.position = new Vector3(position.x, position.y, transform.position.y);
+        }
+
+        public void SetSize(float size)
+        {
+            transform.localScale = new Vector3(size, size, transform.localScale.z);
+        }
+
         protected override void OnEnable()
         {
             base.OnEnable();

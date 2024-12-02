@@ -12,12 +12,16 @@ namespace MemoryGame.GamePlay
         [SerializeField]
         private GameFieldSettings _gameFieldSettings;
 
+        [SerializeField]
+        private GameCardSprites _gameCardSprites;
+
         public override void InstallBindings()
         {
             Container.BindFactory<Transform, GameCardView, GameCardView.Factory>()
                 .FromComponentInNewPrefab(_gameCardPrefab);
 
             Container.BindInstance(_gameFieldSettings).WhenInjectedInto<GameFieldBuilder>();
+            Container.BindInstance(_gameCardSprites).WhenInjectedInto<GameCardPresenter>();
         }
     }
 }

@@ -4,6 +4,6 @@ namespace MemoryGame.GamePlay
 {
     internal interface IGameCardPresenter: IPresenter
     {
-        void SetModel(GameCardModel model);
+        void SetModel(IGameCardModel model);
     }
 }

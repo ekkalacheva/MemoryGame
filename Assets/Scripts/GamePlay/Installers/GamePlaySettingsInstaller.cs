@@ -21,7 +21,7 @@ namespace MemoryGame.GamePlay
                 .FromComponentInNewPrefab(_gameCardPrefab);
 
             Container.BindInstance(_gameFieldSettings).WhenInjectedInto<GameFieldBuilder>();
-            Container.BindInstance(_gameCardSprites).WhenInjectedInto<GameCardPresenter>();
+            Container.BindInstance(_gameCardSprites).WhenInjectedInto(typeof(GameCardPresenter), typeof(GameFieldBuilder));
         }
     }
 }

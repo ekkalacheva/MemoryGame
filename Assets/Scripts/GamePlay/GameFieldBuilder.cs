@@ -14,18 +14,21 @@ namespace MemoryGame.GamePlay
         private readonly GameCardView.Factory _gameCardViewFactory;
         private readonly GameFieldOffsets _gameFieldSettings;
         private readonly Transform _cardsContainer;
+        private readonly int _availableCardsAmount;
 
         public GameFieldBuilder(GameComplexityConfig complexityConfig, 
                                 GamePlayModel gamePlayModel, 
                                 GameCardView.Factory gameCardViewFactory, 
                                 GameFieldSettings gameFieldSettings,
-                                [Inject(Id = "GameCardsContainer")] Transform cardsContainer)
+                                [Inject(Id = "GameCardsContainer")] Transform cardsContainer,
+                                GameCardSprites gameCardSprites)
         {
             _complexityConfig = complexityConfig;
             _gamePlayModel = gamePlayModel;
             _gameCardViewFactory = gameCardViewFactory;
             _gameFieldSettings = gameFieldSettings.GetFieldSettings(_gamePlayModel.Complexity);
             _cardsContainer = cardsContainer;
+            _availableCardsAmount = gameCardSprites.Faces.Length;
         }
 
         public void Initialize()
@@ -49,18 +52,18 @@ namespace MemoryGame.GamePlay
             var startCardPositionY = -0.5f *(cardSize * (fieldSize.Rows - 1) + cardsOffset* (fieldSize.Rows - 1));
 
             var ids = GenerateCardIds();
-            var cards = new List<GameCardModel>(fieldSize.Rows * fieldSize.Columns);
+            var cards = new List<IGameCardModel>(fieldSize.Rows * fieldSize.Columns);
 
             for (var i = 0; i < fieldSize.Rows; i++)
             {
                 for (var j = 0; j < fieldSize.Columns; j++)
                 {
-                    var id = ids[j * fieldSize.Columns + i];
+                    var id = ids[i * fieldSize.Columns + j];
 
                     var positionX = startCardPositionX + j * (cardSize + cardsOffset);
                     var positionY = startCardPositionY + i * (cardSize + cardsOffset);
 
-                    var cardModel = new GameCardModel(id, new Vector2(positionX, positionY), cardSize);
+                    var cardModel = new GameCardModel(id,new Vector2(positionX, positionY), cardSize);
                     IGameCardPresenter cardPresenter = (GameCardPresenter)_gameCardViewFactory.Create(_cardsContainer);
                     cardPresenter.SetModel(cardModel);
                 }
@@ -86,13 +89,23 @@ namespace MemoryGame.GamePlay
 
         private int[] GenerateCardIds()
         {
+            var availableCards = new List<int>(_availableCardsAmount);
+            for (var i = 0; i < _availableCardsAmount; i++)
+            {
+                availableCards.Add(i);
+            }
+
             var fieldSize = _complexityConfig.GetFieldSize(_gamePlayModel.Complexity);
             var cardsAmount = fieldSize.Rows * fieldSize.Columns;
             var cards = new int[cardsAmount];
             for (var i = 0; i < cardsAmount / 2; i++)
             {
-                cards[i * 2] = i;
-                cards[i * 2 + 1] = i;
+                var randomIndex = Random.Range(0, availableCards.Count);
+                var id = availableCards[randomIndex];
+                availableCards.RemoveAt(randomIndex);
+
+                cards[i * 2] = id;
+                cards[i * 2 + 1] = id;
             }
 
             ShuffleArray(cards);

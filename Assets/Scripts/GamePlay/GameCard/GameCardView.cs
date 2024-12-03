@@ -1,3 +1,4 @@
+using System;
 using MemoryGame.Base.View;
 using UnityEngine;
 using Zenject;
@@ -6,6 +7,14 @@ namespace MemoryGame.GamePlay
 {
     public class GameCardView : BaseView, IGameCardView
     {
+        [SerializeField]
+        private SpriteRenderer _backRenderer;
+
+        [SerializeField]
+        private SpriteRenderer _faceRenderer;
+
+        public event Action Clicked;
+
         [Inject]
         private void Construct(Transform parent,
                                GameCardPresenter.Factory presenterFactory)
@@ -24,14 +33,24 @@ namespace MemoryGame.GamePlay
             transform.localScale = new Vector3(size, size, transform.localScale.z);
         }
 
-        protected override void OnEnable()
+        public void SetBackSprite(Sprite sprite)
         {
-            base.OnEnable();
+            _backRenderer.sprite = sprite;
         }
 
-        protected override void OnDisable()
+        public void SetFaceSprite(Sprite sprite)
         {
-            base.OnDisable();
+            _faceRenderer.sprite = sprite;
+        }
+
+        private void OnMouseDown()
+        {
+            RiseClickedEvent();
+        }
+
+        private void RiseClickedEvent()
+        {
+            Clicked?.Invoke();
         }
 
         #region Factory

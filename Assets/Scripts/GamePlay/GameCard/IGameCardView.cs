@@ -11,5 +11,7 @@ namespace MemoryGame.GamePlay
         void SetSize(float size);
         void SetBackSprite(Sprite sprite);
         void SetFaceSprite(Sprite sprite);
+        void Open();
+        void Close();
     }
 }

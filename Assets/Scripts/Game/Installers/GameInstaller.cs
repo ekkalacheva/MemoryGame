@@ -1,5 +1,6 @@
 using System;
 using MemoryGame.Base.States;
+using MemoryGame.Utils;
 using Zenject;
 
 namespace MemoryGame.Game
@@ -11,6 +12,7 @@ namespace MemoryGame.Game
             InstallModel();
             InstallScenesLoading();
             InstallStates();
+            InstallUtils();
             InstallSignals();
         }
 
@@ -39,6 +41,15 @@ namespace MemoryGame.Game
         private void InstallScenesLoading()
         {
             Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
+        }
+
+        private void InstallUtils()
+        {
+            Container.Bind<ICoroutineHandler>()
+                .To<CoroutineHandler>()
+                .FromNewComponentOnNewGameObject()
+                .WithGameObjectName("Coroutiner")
+                .AsSingle();
         }
 
         private void InstallSignals()

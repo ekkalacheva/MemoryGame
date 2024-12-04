@@ -21,6 +21,7 @@ namespace MemoryGame.GamePlay
         public void SetModel(IGameCardModel model)
         {
             _model = model;
+            SubscribeModelEvents();
 
             _view.SetPosition(model.Position);
             _view.SetSize(model.Size);
@@ -36,6 +37,43 @@ namespace MemoryGame.GamePlay
         public void UnInitialize()
         {
             _view.Clicked -= OnCardClicked;
+            UnsubscribeModelEvents();
+            _model = null;
+        }
+
+        private void UpdateCardState()
+        {
+            switch (_model.State)
+            {
+                case GameCardState.Closed:
+                    _view.Close();
+                    break;
+                case GameCardState.Opened:
+                    _view.Open();
+                    break;
+                case GameCardState.Collected:
+                    break;
+            }
+        }
+
+        private void SubscribeModelEvents()
+        {
+            if (_model == null)
+            {
+                return;
+            }
+
+            _model.StateChanged += UpdateCardState;
+        }
+
+        private void UnsubscribeModelEvents()
+        {
+            if (_model == null)
+            {
+                return;
+            }
+
+            _model.StateChanged -= UpdateCardState;
         }
 
         private void OnCardClicked()

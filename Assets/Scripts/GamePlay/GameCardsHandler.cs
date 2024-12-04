@@ -1,18 +1,30 @@
 ﻿using System;
+using MemoryGame.Game;
+using MemoryGame.Utils;
 using Zenject;
 
 namespace MemoryGame.GamePlay
 {
     internal class GameCardsHandler: IInitializable, IDisposable
     {
+        private const float CardsHideDelaySeconds = 0.8f;
+
         private readonly SignalBus _signals;
+        private readonly ICoroutineHandler _coroutineHandler;
+        private readonly int _cardsAmount;
 
         private IGameCardModel _openedCard1;
         private IGameCardModel _openedCard2;
-
-        public GameCardsHandler(SignalBus signals)
+        private int _collectedCardsAmount;
+        
+        public GameCardsHandler(SignalBus signals,
+                                ICoroutineHandler coroutineHandler,
+                                GamePlayModel gamePlayModel,
+                                GameComplexityConfig complexityConfig)
         {
             _signals = signals;
+            _coroutineHandler = coroutineHandler;
+            _cardsAmount = complexityConfig.GetCardsAmount(gamePlayModel.Complexity);
         }
 
         public void Initialize()
@@ -55,10 +67,26 @@ namespace MemoryGame.GamePlay
                 _openedCard2.State = GameCardState.Collected;
                 _openedCard1 = null;
                 _openedCard2 = null;
+                PairCardsCollected();
                 return;
             }
 
-            //TODO: Hide cards with delay;
+            _coroutineHandler.DelayAction(() =>
+            {
+                _openedCard1.State = GameCardState.Closed;
+                _openedCard2.State = GameCardState.Closed;
+                _openedCard1 = null;
+                _openedCard2 = null;
+            }, CardsHideDelaySeconds);
+        }
+
+        private void PairCardsCollected()
+        {
+            _collectedCardsAmount += 2;
+            if (_collectedCardsAmount == _cardsAmount)
+            {
+                _signals.TryFire<GamePlaySignals.GameCompleted>();
+            }
         }
     }
 }

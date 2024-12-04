@@ -43,6 +43,18 @@ namespace MemoryGame.GamePlay
             _faceRenderer.sprite = sprite;
         }
 
+        public void Open()
+        {
+            _backRenderer.gameObject.SetActive(false);
+            _faceRenderer.gameObject.SetActive(true);
+        }
+
+        public void Close()
+        {
+            _backRenderer.gameObject.SetActive(true);
+            _faceRenderer.gameObject.SetActive(false);
+        }
+
         private void OnMouseDown()
         {
             RiseClickedEvent();

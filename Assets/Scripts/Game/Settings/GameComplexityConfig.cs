@@ -26,6 +26,12 @@ namespace MemoryGame.Game
                 default: throw new NotImplementedException("Unsupported complexity type");
             }
         }
+
+        public int GetCardsAmount(GameComplexity complexity)
+        {
+            var fieldSize = GetFieldSize(complexity);
+            return fieldSize.Columns * fieldSize.Rows;
+        }
     }
 
     [Serializable]

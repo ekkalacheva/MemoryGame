@@ -23,6 +23,7 @@ namespace MemoryGame.GamePlay
         private void InstallSignals()
         {
             Container.DeclareSignal<GamePlaySignals.CardClicked>().OptionalSubscriber();
+            Container.DeclareSignal<GamePlaySignals.GameCompleted>().OptionalSubscriber();
         }
     }
 }

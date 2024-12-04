@@ -94,9 +94,7 @@ namespace MemoryGame.GamePlay
             {
                 availableCards.Add(i);
             }
-
-            var fieldSize = _complexityConfig.GetFieldSize(_gamePlayModel.Complexity);
-            var cardsAmount = fieldSize.Rows * fieldSize.Columns;
+            var cardsAmount = _complexityConfig.GetCardsAmount(_gamePlayModel.Complexity);
             var cards = new int[cardsAmount];
             for (var i = 0; i < cardsAmount / 2; i++)
             {

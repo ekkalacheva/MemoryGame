@@ -11,5 +11,9 @@
                 Card = card;
             }
         }
+
+        public class GameCompleted
+        {
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace MemoryGame.GamePlay
             Container.BindFactory<Transform, GameCardView, GameCardView.Factory>()
                 .FromComponentInNewPrefab(_gameCardPrefab);
 
-            Container.BindInstance(_gameFieldSettings).WhenInjectedInto<GameFieldBuilder>();
+            Container.BindInstance(_gameFieldSettings).AsSingle();
             Container.BindInstance(_gameCardSprites).WhenInjectedInto(typeof(GameCardPresenter), typeof(GameFieldBuilder));
         }
     }

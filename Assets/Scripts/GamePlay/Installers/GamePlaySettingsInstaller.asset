@@ -18,7 +18,7 @@ MonoBehaviour:
       _borderOffset: {x: 0.5, y: 1.4}
       _cardsOffset: 0.4
     _medium:
-      _borderOffset: {x: 0.4, y: 1.2}
+      _borderOffset: {x: 0.3, y: 1.3}
       _cardsOffset: 0.2
     _hard:
       _borderOffset: {x: 0.3, y: 1.3}

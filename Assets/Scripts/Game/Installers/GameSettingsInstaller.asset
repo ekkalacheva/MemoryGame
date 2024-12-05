@@ -20,7 +20,7 @@ MonoBehaviour:
       _rows: 4
       _columns: 2
     _medium:
-      _rows: 5
+      _rows: 4
       _columns: 4
     _hard:
       _rows: 6

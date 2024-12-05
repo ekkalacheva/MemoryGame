@@ -61,7 +61,8 @@ namespace MemoryGame.UI.GamePlay
 
         private void RestartGame()
         {
-            throw new System.NotImplementedException();
+            _view.SetTimeState(true);
+            _signals.TryFire<GamePlaySignals.RestartGame>();
         }
 
         #region Factory

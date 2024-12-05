@@ -42,12 +42,14 @@ namespace MemoryGame.GamePlay
         {
             _signals.Subscribe<GamePlaySignals.GameStarted>(StartTimer);
             _signals.Subscribe<GamePlaySignals.GameCompleted>(StopTimer);
+            _signals.Subscribe<GamePlaySignals.RestartGame>(RestartTimer);
         }
 
         public void Dispose()
         {
             _signals.Unsubscribe<GamePlaySignals.GameStarted>(StartTimer);
             _signals.Unsubscribe<GamePlaySignals.GameCompleted>(StopTimer);
+            _signals.Unsubscribe<GamePlaySignals.RestartGame>(RestartTimer);
         }
 
         private void StartTimer()
@@ -58,6 +60,12 @@ namespace MemoryGame.GamePlay
         private void StopTimer()
         {
             _isActive = false;
+        }
+
+        private void RestartTimer()
+        {
+            _isActive = false;
+            ElapsedSeconds = 0f;
         }
     }
 }

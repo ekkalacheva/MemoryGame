@@ -23,10 +23,9 @@ namespace MemoryGame.GamePlay
             _model = model;
             SubscribeModelEvents();
 
-            _view.SetPosition(model.Position);
-            _view.SetSize(model.Size);
             _view.SetBackSprite(_sprites.Back);
             _view.SetFaceSprite(_sprites.Faces[model.Id]);
+            UpdateCardState();
         }
 
         public void Initialize()

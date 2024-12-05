@@ -26,6 +26,7 @@ namespace MemoryGame.GamePlay
             Container.DeclareSignal<GamePlaySignals.CardClicked>().OptionalSubscriber();
             Container.DeclareSignal<GamePlaySignals.GameStarted>().OptionalSubscriber();
             Container.DeclareSignal<GamePlaySignals.GameCompleted>().OptionalSubscriber();
+            Container.DeclareSignal<GamePlaySignals.RestartGame>().OptionalSubscriber();
         }
     }
 }

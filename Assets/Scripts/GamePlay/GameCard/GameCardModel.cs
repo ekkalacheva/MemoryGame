@@ -7,16 +7,10 @@ namespace MemoryGame.GamePlay
     {
         private int _id;
         private GameCardState _state;
-        private Vector2 _position;
-        private float _size;
 
         public event Action StateChanged;
 
         public int Id => _id;
-
-        public Vector2 Position => _position;
-
-        public float Size => _size;
 
         public GameCardState State
         {
@@ -28,11 +22,9 @@ namespace MemoryGame.GamePlay
             }
         }
 
-        public GameCardModel(int id, Vector2 position, float size)
+        public GameCardModel(int id)
         {
             _id = id;
-            _position = position;
-            _size = size;
         }
 
         private void RiseStateChangedEvent()

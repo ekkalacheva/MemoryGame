@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 namespace MemoryGame.GamePlay
 {
@@ -9,7 +8,5 @@ namespace MemoryGame.GamePlay
 
         public int Id { get; }
         GameCardState State { get; set; }
-        Vector2 Position { get; }
-        float Size { get; }
     }
 }

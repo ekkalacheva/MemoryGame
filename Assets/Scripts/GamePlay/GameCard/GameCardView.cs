@@ -16,10 +16,8 @@ namespace MemoryGame.GamePlay
         public event Action Clicked;
 
         [Inject]
-        private void Construct(Transform parent,
-                               GameCardPresenter.Factory presenterFactory)
+        private void Construct(GameCardPresenter.Factory presenterFactory)
         {
-            transform.SetParent(parent, false);
             _presenter = presenterFactory.Create(this);
         }
 
@@ -65,17 +63,23 @@ namespace MemoryGame.GamePlay
             Clicked?.Invoke();
         }
 
-        #region Factory
-
-        public class Factory : PlaceholderFactory<Transform, GameCardView>
-        {
-        }
-
         public static implicit operator GameCardPresenter(GameCardView view)
         {
             return view._presenter as GameCardPresenter;
         }
 
-        #endregion Factory
+        #region Pool
+
+        public class Pool : MonoMemoryPool<Transform, Vector2, float, GameCardView>
+        {
+            protected override void Reinitialize(Transform parent, Vector2 position, float size, GameCardView view)
+            {
+                view.transform.SetParent(parent, false);
+                view.SetPosition(position);
+                view.SetSize(size);
+            }
+        }
+
+        #endregion
     }
 }

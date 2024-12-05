@@ -19,5 +19,9 @@
         public class GameCompleted
         {
         }
+
+        public class RestartGame
+        {
+        }
     }
 }

@@ -31,11 +31,13 @@ namespace MemoryGame.GamePlay
         public void Initialize()
         {
             _signals.Subscribe<GamePlaySignals.CardClicked>(OnGameCardClicked);
+            _signals.Subscribe<GamePlaySignals.RestartGame>(OnGameRestarted);
         }
 
         public void Dispose()
         {
             _signals.Unsubscribe<GamePlaySignals.CardClicked>(OnGameCardClicked);
+            _signals.Unsubscribe<GamePlaySignals.RestartGame>(OnGameRestarted);
         }
 
         private void OnGameCardClicked(GamePlaySignals.CardClicked args)
@@ -98,6 +100,14 @@ namespace MemoryGame.GamePlay
             {
                 _signals.TryFire<GamePlaySignals.GameCompleted>();
             }
+        }
+
+        private void OnGameRestarted()
+        {
+            _openedCard1 = null;
+            _openedCard2 = null;
+            _gameStarted = false;
+            _collectedCardsAmount = 0;
         }
     }
 }

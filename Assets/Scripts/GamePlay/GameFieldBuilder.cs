@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MemoryGame.Game;
+using ModestTree;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -11,34 +12,41 @@ namespace MemoryGame.GamePlay
     {
         private readonly GameComplexityConfig _complexityConfig;
         private readonly GamePlayModel _gamePlayModel;
-        private readonly GameCardView.Factory _gameCardViewFactory;
         private readonly GameFieldOffsets _gameFieldSettings;
         private readonly Transform _cardsContainer;
         private readonly int _availableCardsAmount;
+        private readonly GameCardView.Pool _gameCardsPool;
+        private readonly SignalBus _signals;
 
+        private List<GameCardView> _cardViews;
+        
         public GameFieldBuilder(GameComplexityConfig complexityConfig, 
                                 GamePlayModel gamePlayModel, 
-                                GameCardView.Factory gameCardViewFactory, 
                                 GameFieldSettings gameFieldSettings,
                                 [Inject(Id = "GameCardsContainer")] Transform cardsContainer,
-                                GameCardSprites gameCardSprites)
+                                GameCardSprites gameCardSprites,
+                                GameCardView.Pool gameCardsPool,
+                                SignalBus signals)
         {
             _complexityConfig = complexityConfig;
             _gamePlayModel = gamePlayModel;
-            _gameCardViewFactory = gameCardViewFactory;
             _gameFieldSettings = gameFieldSettings.GetFieldSettings(_gamePlayModel.Complexity);
             _cardsContainer = cardsContainer;
             _availableCardsAmount = gameCardSprites.Faces.Length;
+            _gameCardsPool = gameCardsPool;
+            _signals = signals;
         }
 
         public void Initialize()
         {
+            _signals.Subscribe<GamePlaySignals.RestartGame>(RestartGame);
+
             CreateGameField();
         }
 
         public void Dispose()
         {
-
+            _signals.Unsubscribe<GamePlaySignals.RestartGame>(RestartGame);
         }
 
         private void CreateGameField()
@@ -52,7 +60,7 @@ namespace MemoryGame.GamePlay
             var startCardPositionY = -0.5f *(cardSize * (fieldSize.Rows - 1) + cardsOffset* (fieldSize.Rows - 1));
 
             var ids = GenerateCardIds();
-            var cards = new List<IGameCardModel>(fieldSize.Rows * fieldSize.Columns);
+            _cardViews = new List<GameCardView>(fieldSize.Rows * fieldSize.Columns);
 
             for (var i = 0; i < fieldSize.Rows; i++)
             {
@@ -63,9 +71,12 @@ namespace MemoryGame.GamePlay
                     var positionX = startCardPositionX + j * (cardSize + cardsOffset);
                     var positionY = startCardPositionY + i * (cardSize + cardsOffset);
 
-                    var cardModel = new GameCardModel(id,new Vector2(positionX, positionY), cardSize);
-                    IGameCardPresenter cardPresenter = (GameCardPresenter)_gameCardViewFactory.Create(_cardsContainer);
+                    var cardModel = new GameCardModel(id);
+                    var cardView = _gameCardsPool.Spawn(_cardsContainer, new Vector2(positionX, positionY), cardSize);
+                    IGameCardPresenter cardPresenter = (GameCardPresenter)cardView;
                     cardPresenter.SetModel(cardModel);
+
+                    _cardViews.Add(cardView);
                 }
             }
         }
@@ -119,6 +130,23 @@ namespace MemoryGame.GamePlay
                 var r = Random.Range(i, numbers.Length);
                 numbers[i] = numbers[r];
                 numbers[r] = tmp;
+            }
+        }
+
+        private void RestartGame()
+        {
+            ClearGameField();
+            CreateGameField();
+        }
+
+        private void ClearGameField()
+        {
+            if (_cardViews.IsEmpty())
+                return;
+
+            foreach (var card in _cardViews)
+            {
+                _gameCardsPool.Despawn(card);
             }
         }
     }

@@ -17,8 +17,9 @@ namespace MemoryGame.GamePlay
 
         public override void InstallBindings()
         {
-            Container.BindFactory<Transform, GameCardView, GameCardView.Factory>()
-                .FromComponentInNewPrefab(_gameCardPrefab);
+            Container.BindMemoryPool<GameCardView, GameCardView.Pool>()
+                .FromComponentInNewPrefab(_gameCardPrefab)
+                .UnderTransformGroup("GameCardsPool");
 
             Container.BindInstance(_gameFieldSettings).AsSingle();
             Container.BindInstance(_gameCardSprites).WhenInjectedInto(typeof(GameCardPresenter), typeof(GameFieldBuilder));

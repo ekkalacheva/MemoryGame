@@ -6,5 +6,8 @@ namespace MemoryGame.UI.GamePlay
     {
         event Action BackButtonClicked;
         event Action RestartButtonClicked;
+
+        public void SetTime(float timeSeconds);
+        public void SetTimeState(bool isActive);
     }
 }

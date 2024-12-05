@@ -16,6 +16,7 @@ namespace MemoryGame.GamePlay
         private IGameCardModel _openedCard1;
         private IGameCardModel _openedCard2;
         private int _collectedCardsAmount;
+        private bool _gameStarted;
         
         public GameCardsHandler(SignalBus signals,
                                 ICoroutineHandler coroutineHandler,
@@ -50,6 +51,7 @@ namespace MemoryGame.GamePlay
             {
                 _openedCard1 = args.Card;
                 _openedCard1.State = GameCardState.Opened;
+                CheckGameStart();
                 return;
             }
 
@@ -78,6 +80,15 @@ namespace MemoryGame.GamePlay
                 _openedCard1 = null;
                 _openedCard2 = null;
             }, CardsHideDelaySeconds);
+        }
+
+        private void CheckGameStart()
+        {
+            if (!_gameStarted)
+            {
+                _gameStarted = true;
+                _signals.TryFire<GamePlaySignals.GameStarted>();
+            }
         }
 
         private void PairCardsCollected()

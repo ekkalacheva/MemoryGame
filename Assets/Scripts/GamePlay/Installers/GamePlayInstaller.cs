@@ -14,6 +14,7 @@ namespace MemoryGame.GamePlay
         {
             Container.BindInterfacesAndSelfTo<GameFieldBuilder>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameCardsHandler>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GamePlayTimer>().AsSingle();
 
             Container.BindFactory<IGameCardView, GameCardPresenter, GameCardPresenter.Factory>()
                 .To<GameCardPresenter>()
@@ -23,6 +24,7 @@ namespace MemoryGame.GamePlay
         private void InstallSignals()
         {
             Container.DeclareSignal<GamePlaySignals.CardClicked>().OptionalSubscriber();
+            Container.DeclareSignal<GamePlaySignals.GameStarted>().OptionalSubscriber();
             Container.DeclareSignal<GamePlaySignals.GameCompleted>().OptionalSubscriber();
         }
     }

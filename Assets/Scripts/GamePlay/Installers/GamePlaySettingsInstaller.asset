@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GamePlaySettingsInstaller
   m_EditorClassIdentifier: 
   _gameCardPrefab: {fileID: 3777973776010571981, guid: 482b75fbcb8559147a53730d7948fd76, type: 3}
-  _gameFieldSettings:
+  _gameFieldSettingsPhone:
     _easy:
       _borderOffset: {x: 0.5, y: 1.4}
       _cardsOffset: 0.4
@@ -22,6 +22,16 @@ MonoBehaviour:
       _cardsOffset: 0.2
     _hard:
       _borderOffset: {x: 0.3, y: 1.3}
+      _cardsOffset: 0.2
+  _gameFieldSettingsTablet:
+    _easy:
+      _borderOffset: {x: 0.5, y: 1.6}
+      _cardsOffset: 0.4
+    _medium:
+      _borderOffset: {x: 0.3, y: 1.8}
+      _cardsOffset: 0.2
+    _hard:
+      _borderOffset: {x: 0.3, y: 1.6}
       _cardsOffset: 0.2
   _gameCardSprites:
     _back: {fileID: -4571828015118065507, guid: 6670114f77eb74044a3f4d6d14e95cc1, type: 3}

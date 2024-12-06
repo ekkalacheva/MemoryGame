@@ -1,6 +1,7 @@
 ﻿using System;
 using MemoryGame.Game;
 using MemoryGame.Utils;
+using UnityEngine;
 using Zenject;
 
 namespace MemoryGame.GamePlay
@@ -17,7 +18,8 @@ namespace MemoryGame.GamePlay
         private IGameCardModel _openedCard2;
         private int _collectedCardsAmount;
         private bool _gameStarted;
-        
+        private Coroutine _cardsCloseCoroutine;
+
         public GameCardsHandler(SignalBus signals,
                                 ICoroutineHandler coroutineHandler,
                                 GamePlayModel gamePlayModel,
@@ -75,12 +77,13 @@ namespace MemoryGame.GamePlay
                 return;
             }
 
-            _coroutineHandler.DelayAction(() =>
+            _cardsCloseCoroutine = _coroutineHandler.DelayAction(() =>
             {
                 _openedCard1.State = GameCardState.Closed;
                 _openedCard2.State = GameCardState.Closed;
                 _openedCard1 = null;
                 _openedCard2 = null;
+                _cardsCloseCoroutine = null;
             }, CardsHideDelaySeconds);
         }
 
@@ -104,6 +107,11 @@ namespace MemoryGame.GamePlay
 
         private void OnGameRestarted()
         {
+            if (_cardsCloseCoroutine != null)
+            {
+                _coroutineHandler.StopCoroutine(_cardsCloseCoroutine);
+            }
+            
             _openedCard1 = null;
             _openedCard2 = null;
             _gameStarted = false;

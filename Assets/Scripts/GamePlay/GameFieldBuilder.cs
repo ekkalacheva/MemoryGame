@@ -17,6 +17,7 @@ namespace MemoryGame.GamePlay
         private readonly int _availableCardsAmount;
         private readonly GameCardView.Pool _gameCardsPool;
         private readonly SignalBus _signals;
+        private readonly Camera _camera;
 
         private List<GameCardView> _cardViews;
         
@@ -35,6 +36,7 @@ namespace MemoryGame.GamePlay
             _availableCardsAmount = gameCardSprites.Faces.Length;
             _gameCardsPool = gameCardsPool;
             _signals = signals;
+            _camera = Camera.main;
         }
 
         public void Initialize()
@@ -83,8 +85,8 @@ namespace MemoryGame.GamePlay
 
         private float CalculateCardSize()
         {
-            var cameraHeight = Camera.main.orthographicSize * 2;
-            var cameraWidth = cameraHeight * Camera.main.aspect;
+            var cameraHeight = _camera.orthographicSize * 2;
+            var cameraWidth = cameraHeight * _camera.aspect;
 
             var borderOffset = _gameFieldSettings.BorderOffset;
             var cardsOffset = _gameFieldSettings.CardsOffset;

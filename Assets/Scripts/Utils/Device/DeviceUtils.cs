@@ -9,8 +9,12 @@ namespace MemoryGame.Utils
             get
             {
 #if UNITY_EDITOR
-                var debugSettings = DebugEditorUtils.GetDebugSettings();
-                return debugSettings?.IsTablet ?? true;
+                var isSimulator = !UnityEngine.Device.Application.isEditor || UnityEngine.Device.Application.isMobilePlatform;
+                if (!isSimulator)
+                {
+                    var debugSettings = DebugEditorUtils.GetDebugSettings();
+                    return debugSettings?.IsTablet ?? true;
+                }
 #endif
                 if (!_isTablet.HasValue)
                 {
